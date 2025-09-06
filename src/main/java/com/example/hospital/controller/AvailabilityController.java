@@ -16,15 +16,18 @@ import java.util.List;
 public class AvailabilityController {
     private final AvailabilityService availabilityService;
 
+    // 🩺 Only Doctors/Admins can add slots
     @PostMapping
     @PreAuthorize("hasRole('DOCTOR') or hasRole('ADMIN')")
     public ResponseEntity<Availability> addSlot(@RequestBody AvailabilityDTO dto) {
         return ResponseEntity.ok(availabilityService.addSlot(dto));
     }
 
+    // 👥 Public: Patients can view slots of a doctor
     @GetMapping("/doctor/{doctorId}")
     public ResponseEntity<List<Availability>> getSlots(@PathVariable Long doctorId,
                                                        @RequestParam String date) {
         return ResponseEntity.ok(availabilityService.getSlots(doctorId, date));
     }
 }
+

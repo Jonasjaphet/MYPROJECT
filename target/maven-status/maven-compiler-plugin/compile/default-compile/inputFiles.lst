@@ -1,5 +1,4 @@
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\config\DatabaseTest.java
-C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\config\GlobalExceptionHandler.java
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\config\JwtAuthenticationFilter.java
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\config\OpenApiConfig.java
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\config\SecurityConfig.java
@@ -15,6 +14,8 @@ C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hosp
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\dto\AvailabilityDTO.java
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\dto\CreateDoctorRequest.java
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\dto\CreatePatientRequest.java
+C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\exception\CustomErrorController.java
+C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\exception\GlobalExceptionHandler.java
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\HospitalApplication.java
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\model\Appointment.java
 C:\Users\JYOU\Downloads\hospital_booking\hospital\src\main\java\com\example\hospital\model\AppointmentStatus.java

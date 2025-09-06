@@ -30,45 +30,57 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // 🔓 RUHUSU ENDPOINTS ZA PUBLIC BILA TOKEN
+                        // 🔓 Public endpoints
                         .requestMatchers(
-                                "/auth/**",                  // Login & Register
-                                "/v3/api-docs/**",          // Swagger API docs
-                                "/swagger-ui.html",         // Swagger UI
-                                "/swagger-ui/**",           // Swagger UI resources
-                                "/swagger-resources/**",    // Swagger resources
-                                "/webjars/**",              // Web jars
-                                "/api/availability/**"      // Availability (public)
+                                "/auth/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
                         ).permitAll()
+                        .requestMatchers("/api/availability/doctor/**").permitAll() // GET slots public
 
-                        // 👥 ENDPOINTS ZA PATIENTS
+                        // 👥 Patients
                         .requestMatchers(
                                 "/api/appointments/book",
                                 "/api/appointments/patient/**",
                                 "/api/profile/patient"
                         ).hasAnyRole("PATIENT", "ADMIN")
 
-                        // 🩺 ENDPOINTS ZA DOCTORS
+                        // 🩺 Doctors
                         .requestMatchers(
                                 "/api/appointments/doctor/**",
-                                "/api/appointments/**/approve",
-                                "/api/appointments/**/reject",
-                                "/api/availability",
+                                "/api/appointments/*/approve",
+                                "/api/appointments/*/reject",
+                                "/api/availability",        // POST slot
                                 "/api/profile/doctor"
                         ).hasAnyRole("DOCTOR", "ADMIN")
 
-                        // ⚙️ ENDPOINTS ZA ADMIN
+                        // ⚙️ Admin
                         .requestMatchers(
                                 "/api/profile/doctor",
                                 "/api/profile/patient"
                         ).hasRole("ADMIN")
 
-                        // 🔐 ENDPOINTS ZOTE ZINGINE ZIHITAJI AUTHENTICATION
+                        // 🔐 All others
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((req, res, e) -> {
+                            res.setStatus(401);
+                            res.setContentType("application/json");
+                            res.getWriter().write("{\"status\":401,\"error\":\"Unauthorized\",\"message\":\"Invalid or missing token\"}");
+                        })
+                        .accessDeniedHandler((req, res, e) -> {
+                            res.setStatus(403);
+                            res.setContentType("application/json");
+                            res.getWriter().write("{\"status\":403,\"error\":\"Forbidden\",\"message\":\"Access Denied\"}");
+                        })
+                );
 
         return http.build();
     }

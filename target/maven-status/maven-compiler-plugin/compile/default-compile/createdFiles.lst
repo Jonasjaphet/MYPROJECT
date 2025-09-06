@@ -33,9 +33,10 @@ com\example\hospital\config\DatabaseTest.class
 com\example\hospital\HospitalApplication.class
 com\example\hospital\repository\AvailabilityRepository.class
 com\example\hospital\model\User$UserBuilder.class
-com\example\hospital\config\GlobalExceptionHandler.class
 com\example\hospital\repository\UserRepository.class
 com\example\hospital\repository\AppointmentRepository.class
 com\example\hospital\config\SecurityConfig.class
 com\example\hospital\controller\AvailabilityController.class
+com\example\hospital\exception\GlobalExceptionHandler.class
+com\example\hospital\exception\CustomErrorController.class
 com\example\hospital\dto\CreatePatientRequest.class
